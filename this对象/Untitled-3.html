@@ -15,11 +15,14 @@
         func:function(){
             console.log(this===window);//false
             console.log(this==obj);//true;
-            
+            var tmp = this;
             
             demo();
             function demo(){
-               console.log(this.age);
+               console.log(this.age);//undefined   this 表示window对象，并不是obj对象
+               console.log(tmp.age);//18
+               console.log(obj.age);//18
+               
                
                
             }//end demo
