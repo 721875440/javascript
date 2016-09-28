@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+var a = 10;
+
+    function one(){
+        function two(){
+            var a = 20;
+            function demo(){
+                alert(a);//寻找到上一级的变量
+            }//end demo
+            demo();
+        }//end 
+        two();
+    }//end one
+
+
+one();
+
+</script>
+</body>
+</html>

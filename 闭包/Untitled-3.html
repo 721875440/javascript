@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+var a = 10;
+
+    function one(){
+        function two(){
+            function demo(a){
+                alert(a);//输出参数变量
+            }//end demo
+            demo(99);
+        }//end 
+        two();
+    }//end one
+
+
+one();
+
+</script>
+</body>
+</html>

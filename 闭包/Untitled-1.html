@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+var a = 10;
+
+    function one(){
+        function two(){
+            function demo(){
+                alert(a);//变量a会向上寻找变量a，找到后进行输出
+            }//end demo
+            demo();
+        }//end 
+        two();
+    }//end one
+
+
+one();
+
+</script>
+</body>
+</html>
