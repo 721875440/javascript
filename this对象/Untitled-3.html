@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+    
+    var obj = {
+        name:'zhangsan',
+        age:18,
+        func:function(){
+            console.log(this===window);//false
+            console.log(this==obj);//true;
+            
+            
+            demo();
+            function demo(){
+               console.log(this.age);
+               
+               
+            }//end demo
+        }//end function
+    }//end obj
+obj.func();
+
+</script>
+
+</body>
+</html>
