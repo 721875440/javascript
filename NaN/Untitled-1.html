@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+document.writeln( Number.NaN ); // NaN
+document.writeln( typeof Number.NaN ); // number
+
+// NaN不与自身相等
+document.writeln( Number.NaN === Number.NaN ); //  false
+// 也不与自身的值相等
+document.writeln( Number.NaN == Number.NaN ); // false
+
+// 使用isNaN()函数判断一个值是否等效于NaN
+document.writeln( isNaN("张三") ); // true
+
+</script>
+
+</body>
+</html>

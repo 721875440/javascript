@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<input type="text" id="demo">
+<script>
+var demo = document.getElementById("demo");//获取ID
+demo.addEventListener("textInput",function(x){ //监听事件
+    console.log(x.data);//输出事件源的信息
+});
+</script>
+</body>
+</html>

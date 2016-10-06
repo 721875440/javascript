@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+parseInt("1234blue"); //returns 1234 
+parseInt("0xA"); //returns 10 
+parseInt("22.5"); //returns 22 
+parseInt("blue"); //returns NaN
+
+parseInt("10", 2); //returns 2 
+parseInt("10", 8); //returns 8 
+parseInt("10", 10); //returns 10 
+
+
+parseInt("010"); //returns 8 
+parseInt("010", 8); //returns 8 
+parseInt("010", 10); //returns 10 
+
+
+
+parseFloat("1234blue"); //returns 1234.0 
+parseFloat("0xA"); //returns NaN 
+parseFloat("22.5"); //returns 22.5 
+parseFloat("22.34.5"); //returns 22.34 
+parseFloat("0908"); //returns 908 
+parseFloat("blue"); //returns NaN
+
+Boolean(""); //false – empty string 
+Boolean("hi"); //true – non-empty string 
+Boolean(100); //true – non-zero number 
+Boolean(null); //false - null 
+Boolean(0); //false - zero 
+Boolean(new Object()); //true – object
+
+
+
+Number(false);// 0 
+Number(true);// 1 
+Number(undefined);// NaN 
+Number(null);// 0 
+Number( "5.5 ");// 5.5 
+Number( "56 ");//56 
+Number( "5.6.7 ");// NaN 
+Number(new Object());// NaN 
+Number(100);// 100
+
+
+</script>
+
+</body>
+</html>
