@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Hello WebGL</title>
+        <script id="vertex-shader" type="x-shader/x-vertex">
+          attribute vec4 vPosition;
+          void main() {
+            gl_Position = vPosition;
+          }
+        </script>
+        
+        <script id="fragment-shader" type="x-shader/x-fragment">
+          precision highp float;
+            
+          void main() {
+            gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); // green (opaque)
+          }
+        </script>
+        
+        <script>
+          function initWebGL() {
+            
+            // Retrieve the canvas element
+            var canvas = document.getElementById("canvas");
+            if (null == canvas) {
+            throw Error("不支持Canvas");
+          }
+                
+
+          //创建webgl
+          var gl = null;
+          try {
+                gl = canvas.getContext("experimental-webgl");
+              }
+              catch (error) {
+                var msg = "Error creating WebGL context: " + e.toString();
+                throw Error(msg);
+              }
+                
+          // Clear the WebGL view port and set it's color to the supplied color values
+          gl.clearColor(0.0, 0.0, 0.0, 1.0);
+                
+          // Enable depth tests
+          gl.enable(gl.DEPTH_TEST);
+                
+          // Clear the depth buffer and color buffer
+          gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+                
+          // Set the WebGL context as a global variable
+          window.gl = gl;
+        }
+            
+
+        function getShader(id) {
+                
+          // Find the shader script element
+          var shaderScriptElement = document.getElementById(id);
+          if (null == shaderScriptElement) {
+            throw Error("Shader script element not found. Element id: " + id);
+          }
+                
+          // Retrieve the shader source code from the shader java-script element
+          var shaderText = "";
+          var domIter = shaderScriptElement.firstChild;
+          while (domIter) {
+            // If the current node is a text node, append it's contents 
+            if (3 == domIter.nodeType) {
+              shaderText += domIter.textContent;
+            }
+              domIter = domIter.nextSibling;
+            }
+                
+            // Create the shader object instance                
+            var shader = null;
+            if (shaderScriptElement.type == "x-shader/x-fragment") {
+              shader = gl.createShader(gl.FRAGMENT_SHADER);
+            } 
+            else if (shaderScriptElement.type == "x-shader/x-vertex") {
+              shader = gl.createShader(gl.VERTEX_SHADER);
+            }
+            else {
+              throw Error("unrecognized shader type. shaderScript.type: " + shaderScriptElement.type);
+            }
+                
+            // Set the shader source code in the shader object instance and compile the shader
+            gl.shaderSource(shader, shaderText);
+            gl.compileShader(shader);
+            if (null == gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+              throw Error("Shader compilation failed. Error: \"" + gl.getShaderInfoLog(shader) + "\"");
+            }
+                
+            return shader;
+        }
+            
+        /* 
+          Initialize the vertex and fragment shaders - this involves:
+            1) Create new instances of the vertex and fragment shaders
+            2) Create a new shader program
+            3) Attach the vertex and fragment shader instances to the shader program
+            4) Bind any shader attributes to the appropriate locations
+            5) Link the shader program
+            
+        */
+          function initShaders() {
+            // Retrieve the vertex shader
+            var vertexShader = getShader("vertex-shader");
+                
+            // Retrieve the fragment shader
+            var fragmentShader = getShader("fragment-shader");
+                
+            // Create the shader program and save a global reference to it
+            window.shaderProgram = gl.createProgram();
+                
+            // Attach the shaders to the shader program 
+            gl.attachShader(shaderProgram, vertexShader);
+            gl.attachShader(shaderProgram, fragmentShader);
+                
+            // Bind the attribute location (vPosition) to the shader program
+            // The 0 tells WebGL to ensure the attribute vPosition will be found at attribute index 0
+            gl.bindAttribLocation(shaderProgram, 0, "vPosition");
+                
+            // Link the shader program
+                gl.linkProgram(shaderProgram);
+                if (null == gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+                    throw Error("Error linking shader program: \"" + gl.getProgramInfoLog(shaderProgram) + "\"");
+                }
+                
+
+          }
+            
+          /*
+            Draw an object - this involves the following steps: 
+              1) Define the vertices of the object to draw
+              2) Install a shader program into the WebGL context
+              3) Create and initialize the vertex buffer's data-store
+          */
+          function draw() {
+            // Define the vertices for a triangle
+            var vertices = [
+              0.0, 0.5, 0.0,
+              -0.5, -0.5, 0.0,
+              0.5, -0.5, 0.0                        
+            ];
+                
+            // Install a shader program into the WebGL context
+            gl.useProgram(shaderProgram);
+
+            // Create a buffer to use in the WebGL instance 
+            var buffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+                
+            // Create and initialize the vertex buffer's data-store
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+                
+            /* 
+              Define an array of generic vertex attribute data
+              The parameters represent the following:
+                Parameter 0: value 0 = Index of the vertex attribute being assigned 
+                  (0 is mapped to the vPosition due to the bindAttribLocation call before linking the program)
+                Parameter 1: value 3 = Number of components in each vertex attribute 
+                Parameter 2: value False = Whether fixed point values should be normalized
+                Parameter 3: value 0 = Offset in bytes between consecutive vertex attributes
+                Parameter 4: value 0 = Offset in bytes of the first component in the first vertex attribute
+            */
+            gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0); 
+                
+            // Enable the vertex attribute array
+            // The 0 parameter specifies to enable the attribute at index 0 as an array
+            gl.enableVertexAttribArray(0);
+                
+            /* Draw the vertex array
+               Parameter 0: Tells WebGL to draw the array and interpret it as triangles
+               as opposed to lines, points, etc...
+               Parameter 1: Start from the first element in the array
+               Parameter 2: Number of elements in array = 3 
+            */
+            gl.drawArrays(gl.TRIANGLES, 0, 3);
+                
+            // Force all buffered GL commands to be executed as quickly as possible by the rendering engine
+            gl.flush();
+          }
+
+          //    Initialize WebGL, initialize the shaders, and draw an object
+          function main() {
+            initWebGL();
+            initShaders();
+            draw();
+          }
+        </script>
+    </head>
+    <body onload="main()">
+      <canvas id="canvas">
+        Canvas element not supported
+      </canvas>
+    </body>
+</html>
