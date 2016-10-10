@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+
+var regExp1 = /^[a-zA-Z]+/;
+document.writeln( regExp1.source ); // ^[a-zA-Z]+
+
+var regExp2 = /^[a-z]+$/mg;
+// 不输出标志符
+document.writeln( regExp2.source ); // ^[a-z]+$
+
+// 以new RegExp()形式创建正则表达式对象实例
+var regExp3 = new RegExp("^[A-Z]{6,12}", "im");
+document.writeln( regExp3.source ); // ^[A-Z]{6,12}
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>
