@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+function parentCheck() {
+    check("");
+    function check() {
+        subCheck();
+        function subCheck() {
+            console.log(arguments.callee);
+            console.log(subCheck.caller.caller)
+        }
+    }
+}
+parentCheck();
+
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
