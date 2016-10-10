@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+var regExp1 = /^[a-zA-Z]+/;
+document.writeln( regExp1.ignoreCase ); // false
+
+// 查找匹配不区分大小写，匹配结果与上一个正则表达式相同
+var regExp2 = /^[a-z]+/i;
+document.writeln( regExp2.ignoreCase ); // true
+
+// 以new RegExp()形式创建正则表达式对象实例，并设置ignoreCase标志i
+var regExp3 = new RegExp("[A-Z]{6,12}", "i");
+document.writeln( regExp3.ignoreCase ); // true
+</script>
+
+</body>
+</html>
