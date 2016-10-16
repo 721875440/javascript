@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+
+<script>
+
+    function demo(a,b){
+        return function(c){//返回一个函数
+            alert(a+b+c);
+          }//function two
+    }//end function one
+
+    demo(1,5)(2);
+
+
+
+
+    function test(a,b){
+        return function(c){//返回一个函数
+            return function(d){
+                 alert(a+b+c-d);
+              }//end function three
+          }//function two
+    }//end function one
+
+    test(5,5)(2)(2);
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>

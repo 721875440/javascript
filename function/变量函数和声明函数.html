@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+
+<script>
+
+//a(); //这个函数是无法调用的，因为var a 是一个变量函数，所以加载后在能运行
+var a = function(){
+alert("aaa");
+}
+a();
+
+
+
+b();//这个函数可以调用，因为这个函数是一个调用方式的函数
+function b(){
+    alert("bbb");
+}
+b();//这个函数也可以调用
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

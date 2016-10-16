@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<div>
+	<select name="" id="choice" onchange="draw(this.value)">
+		<option value="copy">copy</option>
+		<option value="darken">darken</option>
+		<option value="destination-atop">destination-atop</option>
+		<option value="destination-in">destination-in</option>
+		<option value="destination-out">destination-out</option>
+		<option value="destination-over">destination-over</option>
+		<option value="lighter">lighter</option>
+		<option value="source-atop">source-atop</option>
+		<option value="source-in">source-in</option>
+		<option value="source-out">source-out</option>
+		<option value="source-over">source-over</option>
+		<option value="xor">xor</option>
+	</select>
+</div>
+	<canvas id="canvas" width="800" height="600" style="border:1px solid #ccc;background:#000"></canvas>
+
+<script>
+
+
+var canvas = document.getElementById('canvas'),
+			ctx = canvas.getContext('2d');
+			draw('copy');
+			function draw(val){
+				console.log(val);
+				ctx.clearRect(0,0,800,600);
+				ctx.fillStyle = 'blue';
+				ctx.fillRect(0,0,200,400);
+				ctx.globalCompositeOperation = val;
+				ctx.fillStyle = 'red';
+				ctx.fillRect(150,200,200,400);
+			}
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
