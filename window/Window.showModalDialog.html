@@ -1,0 +1,34 @@
+
+<html>
+<head>
+
+</head>
+ 
+<body>
+
+
+<script>
+function openModal()
+{
+  var a = new Array;
+  a[0] = 1;
+  a[1] = 4;
+
+  var r = window.showModalDialog('demo1.html',
+      a, "dialogwidth: 450; dialogheight: 300; resizable: yes");
+  document.getElementById('foo').textContent = r;
+  alert(r);
+}
+</script>
+
+<input type="button" value="打开对话框" onclick="openModal();">
+
+<div>
+    <p>对话框返回值:</p>
+    <p id="foo">
+</div>
+
+
+
+</body>
+</html>

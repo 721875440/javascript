@@ -1,0 +1,5 @@
+<script>
+document.write("接收的参数: " + window.dialogArguments);
+</script>
+<input id="foo" type="text" value="返回的内容">
+<input type="button" value="Close" onclick="window.returnValue = document.getElementById('foo').value; window.close();">
