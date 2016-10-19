@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+
+
+<script>
+var arr = [1,2,3,4];
+if(arr[0]){//数组存在的话就返回 true  数组不存在就返回 false
+     alert('数组下标存在');
+ }
+
+
+var arr = null;
+if(!arr){//null 值为空
+     alert('空条件返回假');
+ }
+ 
+var arr = undefined;
+if(!arr){//undefined 返回假
+     alert('undefined条件返回假');
+ } 
+ 
+ 
+ 
+var arr = {a:true};
+if(arr.a){//对象的属性可以作为条件
+     alert('对象下标存在');
+ }
+ 
+ 
+ 
+ 
+ 
+
+</script>
+
+
+
+
+</body>
+</html>
