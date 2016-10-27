@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+
+<script>
+//如果用户允许
+if (Notification.permission === "granted") {
+    
+    var notification = new Notification("新邮件");
+    
+} else if (Notification.permission !== 'denied') {
+   //获取用户的同意
+
+    
+    Notification.requestPermission(function (permission) {
+      if(!('permission' in Notification)) {
+        Notification.permission = permission;
+      }
+      if (permission === "granted") {
+        var notification = new Notification("新邮件");
+      }
+    }); 
+
+}
+</script>
+</body>
+</html>

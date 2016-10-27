@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+
+
+window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+   
+    if (window.orientation === 180 || window.orientation === 0) { 
+        alert(window.orientation);
+    } 
+    if (window.orientation === 90 || window.orientation === -90 ){ 
+        alert(window.orientation);
+    } 
+     
+}, false); 
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

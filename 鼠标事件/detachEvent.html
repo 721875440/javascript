@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+</head>
+
+<body>
+
+
+    <button onclick="AddEventHandler ();">添加一个红色按钮的单击事件监听器</button>
+    <button onclick="RemoveEventHandler ();">删除事件监听器</button>
+    <br />
+    <br />
+    <button id="redButton" style="background-color:red">红色按钮</button>
+
+    <script type="text/javascript">
+        function OnRedClick() {
+            alert("事件被调用");
+        }
+
+        function AddEventHandler() {
+            var redButton = document.getElementById("redButton");
+            if (redButton.addEventListener) { // 之前所有的浏览器,除了IE版本9
+                redButton.addEventListener("click", OnRedClick, false);
+            } else {
+                if (redButton.attachEvent) { // IE9之前
+                    redButton.attachEvent('onclick', OnRedClick);
+                }
+            }
+        }
+
+        function RemoveEventHandler() {
+            var redButton = document.getElementById("redButton");
+            if (redButton.removeEventListener) { // 所有浏览器和IE9+
+                redButton.removeEventListener("click", OnRedClick, false);
+            } else {
+                if (redButton.detachEvent) { // IE9 之前
+                    redButton.detachEvent('onclick', OnRedClick);
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<button onclick="notifyMe()">Notify me!</button>
+<script>
+
+var options = {
+  body: 'Do you like my body?',
+  silent: true
+}
+
+var n = new Notification('Test notification',options);
+
+n.silent // should return true
+</script>
+</body>
+</html>

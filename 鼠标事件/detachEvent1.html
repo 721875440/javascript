@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+</head>
+
+<body>
+
+
+ 
+    
+    
+    
+    
+按下面的按钮并释放鼠标按钮在内部或外部浏览器。
+    <br />
+    <button id="testButton">捕获测试</button>
+    
+    
+    
+    
+      <script type="text/javascript">
+        var capturedButton = null;
+        function OnButtonDown (button) {
+            capturedButton = button;
+            if (window.addEventListener) {  // all browsers except IE before version 9
+                window.addEventListener ("mouseup", OnButtonUp, true);
+            }
+            else {
+                if (button.setCapture) {    // IE before version 9
+                    button.attachEvent ("onlosecapture", OnButtonLoseCapture);
+                    button.setCapture ();
+                }
+            }
+        }
+        function OnButtonUp () {
+            if (capturedButton) {
+                if (window.removeEventListener) {   // all browsers except IE before version 9
+                    window.removeEventListener ("mouseup", OnButtonUp, true);
+                }
+                else {
+                    if (capturedButton.releaseCapture) {    // IE before version 9
+                        capturedButton.detachEvent ("onlosecapture", OnButtonLoseCapture);
+                        capturedButton.releaseCapture ();
+                    }
+                }
+                capturedButton = null;
+            }
+            alert ("The button has been released!");
+
+        }
+
+        function OnButtonLoseCapture () {
+            alert ("The button loses the mouse capture!");
+            OnButtonUp ();
+        }
+
+        function Init () {
+            var button = document.getElementById ("testButton");
+            if (button.addEventListener) {  // all browsers except IE before version 9
+                button.addEventListener ("mousedown", function () {OnButtonDown (button)}, false);
+            }
+            else {
+                if (button.attachEvent) {   // IE before version 9
+                    button.attachEvent ("onmousedown", function () {OnButtonDown (button)});
+                    button.attachEvent ("onmouseup", OnButtonUp);
+                }
+            }
+        }
+        Init ();
+    </script>
+
+</body>
+
+</html>

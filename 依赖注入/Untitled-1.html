@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+    var a = function(){
+        this.name = function(){
+          return "aaa";
+           }
+    }
+    
+    
+    var b = function(obj){
+        this.a = obj;
+        document.write(a.name());
+
+    }
+    
+    var A = new a;
+    var B = new b(A);
+    
+    
+    
+    alert(B);    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+</script>
+
+
+
+
+</body>
+</html>
