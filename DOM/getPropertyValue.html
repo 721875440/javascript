@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<style>
+    div{color:red;}
+</style>
+
+<div id="a"></div>
+
+<script>
+var demo = document.getElementById("a");
+var articlestyle = window.getComputedStyle(demo,null).getPropertyValue('color');//获取CSS的属性
+alert (articlestyle);
+</script>
+
+
+
+
+</body>
+</html>

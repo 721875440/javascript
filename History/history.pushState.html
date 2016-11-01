@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+1111111
+
+<button>
+
+<script>
+
+history.pushState({page: 2,a:1,c:5}, 'title 2', '?page=2');
+
+var currentState = history.state;
+console.log(currentState);
+if ('scrollRestoration' in history) {
+  // Back off, browser, I got this...
+  history.scrollRestoration = 'manual';
+}
+
+</script>
+
+
+
+
+</body>
+</html>

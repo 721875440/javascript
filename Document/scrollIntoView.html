@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+
+<div style="width:300px; height:200px; overflow:auto; background-color:#e0d0b0;">
+    <div style="height:200px;"></div>
+    <span id="redText" style="color:red">红色测试文字</span>
+    <div style="height:200px;"></div>
+</div>
+
+
+<br />
+<button onclick="ScrollRed (true);">顶部</button>
+<br />
+<button onclick="ScrollRed (false);">底部</button>
+
+
+<script type="text/javascript">
+    function ScrollRed (alignToTop) {
+        var redText = document.getElementById ("redText");
+        redText.scrollIntoView (alignToTop);
+    }
+</script>
+
+
+
+</body>
+</html>

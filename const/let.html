@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<div id="list"></div>
+
+<script>
+var list = document.getElementById("list");
+
+for (var i = 1; i <= 5; i++) {
+  var item = document.createElement("LI");
+  item.appendChild(document.createTextNode("列表 " + i));
+
+  let j = i;//区块变量
+  var k = i;//全局变量
+  
+  item.onclick = function (ev) {
+    console.log("let = " + j + " var = "+k);
+  };//end onclick
+  list.appendChild(item);
+}//end for
+</script>
+
+
+
+
+</body>
+</html>

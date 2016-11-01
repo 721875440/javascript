@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<div id="con"></div>
+<script>
+(function(){
+    // 监听运动传感事件，查看是否支持硬件运动
+    if (window.DeviceMotionEvent) {
+        window.addEventListener('devicemotion', deviceMotionHandler, false);
+    } else {
+        alert("您的设备不支持硬件调用");
+    }
+ 
+    // 变量初始化
+    var x = 0,
+     y = 0,
+     z = 0,
+    lastX = 0,
+    lastY = 0,
+    lastZ = 0,
+    curTime = 0,
+    lastTime = 0,
+    diffTime = 0,
+    speed = 0;
+ 
+    // 设置一个阀值
+    var SHAKE_THRESHOLD = 800; // 设定摇晃的阈值为600 运行相应操作
+ 
+    function deviceMotionHandler(eventData){
+        var acceleration = eventData.accelerationIncludingGravity;
+ 
+        // 获取当前时间
+        curTime = new Date().getTime();
+        // 计算时间差，当这个差值大于一定值执行计算三个方向的速度
+        if ((curTime - lastTime) > 100) {
+            // 记录上一次的时间
+            diffTime = curTime - lastTime;
+            lastTime = curTime;
+ 
+            // 获取当前三个方向的值
+            x = acceleration.x;
+            y = acceleration.y;
+            z = acceleration.z;
+ 
+            // 计算速度，为了防止出现负数，进行绝对值
+            speed = Math.abs((x + y + z - lastX - lastY - lastZ) / diffTime * 8000);
+            if (speed > SHAKE_THRESHOLD) {
+                alert("我实现摇一摇了");
+            };//end if
+ 
+            // 记录上一次三个方向的值
+            lastX = x;
+            lastY = y;
+            lastZ = z;                    
+        };//end if
+    }//end function
+})();
+
+</script>
+
+
+
+
+</body>
+</html>
