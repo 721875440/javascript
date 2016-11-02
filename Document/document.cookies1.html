@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+
+<script>
+
+
+document.cookie = "test1=Hello";
+document.cookie = "test2=World";
+
+var myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)test2\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+alert(myCookie);
+// 显示: World
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

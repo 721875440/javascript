@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+
+
+function replacer(match, p1, p2, p3, offset, string) {
+    alert(string);
+    /*
+    match:匹配的子串
+    p1:正则表达式匹配的第1个参数结果
+    p2:正则表达式匹配的第2个参数结果
+    p3:正则表达式匹配的第3个参数结果
+    offset:匹配到的子字符串在原字符串中的偏移量
+    string:被匹配的原字符串。
+    */
+  return [p1, p2, p3].join(' - ');
+}
+var newString = 'abc12345#$*%'.replace(/([^\d]*)(\d*)([^\w]*)/, replacer);//函数回调
+
+console.log(newString);
+
+
+
+</script>
+
+</body>
+</html>
