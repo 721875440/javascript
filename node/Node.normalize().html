@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+
+<script>
+
+
+var wrapper = document.createElement("div");
+
+wrapper.appendChild( document.createTextNode("Part 1 ") );
+wrapper.appendChild( document.createTextNode("Part 2 ") );
+
+// At this point, wrapper.childNodes.length === 2
+// wrapper.childNodes[0].textContent === "Part 1 "
+// wrapper.childNodes[1].textContent === "Part 2 "
+
+
+wrapper.normalize();
+
+// wrapper.childNodes.length === 1
+// wrapper.childNodes[0].textContent === "Part 1 Part 2 "
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
