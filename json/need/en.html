@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			body,html{
+				margin:0;
+				padding:0;
+				font-family:'黑体';
+			}
+			.warp{
+				width:500px;
+				height:auto;
+				margin:200px auto 0 auto;
+			}
+			.off_on{
+				width:60px;
+				height:28px;
+				border:1px solid #ccc;
+				margin:0 auto;
+				font-family:'黑体';
+				font-size:12px;
+				text-align:center;
+			}
+			.content{
+				width:100%;
+				height:0px;
+				text-align:center;
+				overflow:hidden;
+			}
+			.gz>span>input{
+				width:30px;
+			}
+			.content>button{
+				background:none;
+				font-family:'黑体';
+			}
+			.title_mj{
+				width:80%;
+				border-bottom:1px dashed #ddd;
+				margin:0 auto;
+			}
+			.gz>span{
+				display:block;
+				margin-top:5px;
+			}
+		</style>
+		<script src="/jquery-1.8.3.min.js"></script>
+	</head>
+	<body>
+		<div class="warp">
+		
+		
+		
+		
+			<div class="content">
+				<br>
+				<h3 class="title_mj">满减红包：</h3>
+				<br>
+				<div class="gz">
+					<span>满￥<input type="text">减￥<input type="text"></span>
+				</div>
+				<br>
+				<br>
+				<button onclick='jia()';>＋</button>　<button onclick="jian()">－</button>　<button onclick="go()">提交</button>	
+			</div>
+			
+			
+			
+			
+			<div class="off_on">
+				满减红包<br>︾
+			</div>
+		</div>
+	</body>
+	<script>
+		var content=document.getElementsByClassName('content')[0];//获取class为content元素
+		var off_on=document.getElementsByClassName('off_on')[0];//同上，获取off_on
+		var gz=document.getElementsByClassName('gz')[0];
+		//获取元素css属性函数
+		function getStyle(obj,style){
+			//if判断兼容性处理，不多解释，找度娘
+			if(obj.currentStyle){
+				return obj.currentStyle[style];
+			}else{
+				return getComputedStyle(obj,null)[style];
+			}
+		}
+		
+		//运动框架move(需要控制的元素,需要控制的元素CSS属性,需要到达的状态);
+		function move(obj,style,target){
+			clearInterval(obj.run);//obj.run,给传进来的obj定义一个叫run的定时器方法，调用该函数时先删除这个定时器，在进行新的一次调用，避免重复调用;
+			obj.run=setInterval(function(){
+				var cur=parseInt(getStyle(obj,style));//由于getStyle()返回的结果是字符串的形式，例如300px。所以需要用parseInt(getStyle())方法将结果转化为Number类型，才可以进行数字操作（加减乘除）。
+				var speed=(target-cur)/6;
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);//(target-cur)/6有可能得到多位小数的结果，这里运用一个三元运算符，判断当speed大于0的时候，就向上取整，小于0就向下取整。
+				if(cur==target){
+					clearInterval(obj.run);//当需要改变的css属性==目标值的时候，停止计时器
+				}else{
+					obj.style[style]=cur+speed+'px';//如果不等于目标值，就执行这段代码。
+				}
+			},30);
+		}
+		
+		
+		//点击事件
+		off_on.onclick=function(){
+			if(parseInt(getStyle(content,'height'))==300){
+				move(content,'height',0);
+				this.innerHTML='满减红包<br>︾';
+			}else{
+				move(content,'height',300);
+				this.innerHTML='满减红包<br>︽';
+			}
+		}//当off_on被鼠标点击之后，判断content的高是否等于300，如果等于300，调用运动框架，让他的高等于0（收起），如果不等于300，那就加到300（打开）;
+		
+		//添加节点
+		function jia(){
+			if(gz.getElementsByTagName('span').length<7){
+				gz.innerHTML+='<span>满￥<input type="text">减￥<input type="text"></span>';
+			}
+		}
+		function jian(){
+			var span=gz.getElementsByTagName('span');
+			if(span.length>1){
+				gz.removeChild(span[span.length-1]);
+			}
+		}
+		
+		//发送
+		function go(){
+			var obj={};
+			var span=gz.getElementsByTagName('span');
+			for(var i=0;i<span.length;i++){
+			    var val1=span[i].getElementsByTagName('input')[0].value;
+				var val2=span[i].getElementsByTagName('input')[1].value;
+				obj[val1]=val2;
+				json=JSON.stringify(obj);
+			}
+			XHR(json);
+		}
+		
+		
+		//ajax
+		function XHR(file){
+			var ajax=null;
+			if(window.ActionXObject){
+				ajax=new ActionXObject('Microsoft.XMLHTTP');
+			}else{
+				ajax=new XMLHttpRequest();
+			}
+			
+			if(ajax != null){
+				ajax.open('post','1.php',true);
+				ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+
+                
+				ajax.onreadystatechange=callback;
+				ajax.send(file);
+			}
+			
+			function callback(){
+				if(ajax.readyState==4){
+					if(ajax.status==200){
+						call=ajax.responseText;
+						console.log(call);
+					}
+				}
+			}
+		}
+	</script>
+</html>

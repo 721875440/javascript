@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			body,html{
+				margin:0;
+				padding:0;
+				font-family:'黑体';
+			}
+			.warp{
+				width:500px;
+				height:auto;
+				margin:200px auto 0 auto;
+			}
+			.off_on{
+				width:60px;
+				height:28px;
+				border:1px solid #ccc;
+				margin:0 auto;
+				font-family:'黑体';
+				font-size:12px;
+				text-align:center;
+			}
+			.content{
+				width:100%;
+				height:0px;
+				text-align:center;
+				overflow:hidden;
+			}
+			.gz>span>input{
+				width:30px;
+			}
+			.content>button{
+				background:none;
+				font-family:'黑体';
+			}
+			.title_mj{
+				width:80%;
+				border-bottom:1px dashed #ddd;
+				margin:0 auto;
+			}
+			.gz>span{
+				display:block;
+				margin-top:5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="warp">
+		
+		
+		
+		
+			<div class="content">
+				<br>
+				<h3 class="title_mj">满减红包：</h3>
+				<br>
+				<div class="gz">
+					<span>满￥<input type="text">减￥<input type="text"></span>
+				</div>
+				<br>
+				<br>
+				<button onclick='jia()';>＋</button>　<button onclick="jian()">－</button>　<button onclick="go()">提交</button>	
+			</div>
+			
+			
+			
+			
+			<div class="off_on">
+				满减红包<br>︾
+			</div>
+		</div>
+	</body>
+	<script>
+	 submit()
+    function submit(){
+    var data={};
+    data.type="aa";
+    data.comment="bb";
+
+    //get right XMLHttpRequest object for current browsrer
+    var x=new XMLHttpRequest();
+
+    var string = JSON.stringify(data);
+
+    x.open('POST','1.php',true);
+    x.setRequestHeader('Content-type','application/json; charset=utf-8');
+    x.setRequestHeader("Content-length", string.length);
+    x.setRequestHeader("Connection", "close");
+
+    x.onreadystatechange = function(){
+        if (x.readyState != 4) return;
+        if (x.status != 200 && x.status != 304) {
+            alert('HTTP error ' + req.status);
+            return;
+        }
+
+        data.resp = JSON.parse(x.responseText);
+        if(data.resp.status=='success'){
+            alert('That worked!');
+        }else{
+            alert('That didn\'t work!');
+        }
+    }
+    x.send(string);
+
+    return false; //prevent native form submit
+}
+    
+    
+    
+	</script>
+</html>
