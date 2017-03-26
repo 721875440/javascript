@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+
+
+<script>
+function array_multi2single(arr){
+    
+    var tmparr = [];
+    arr.forEach(function(e){  //第一层数组循环
+        e.forEach(function(a){  //第二层数组循环
+            tmparr.push(a);//数组最后插入  
+        });//end forEach
+    });
+    return tmparr;  //返回数组
+
+}//end array_multi2single
+
+var arr = [[1,2,3],[4,5,6]];//定义一个二维数组
+var narr = array_multi2single(arr);//执行函数
+console.log(narr);//控制台输出数组
+
+</script>
+
+
+
+
+
+</body>
+</html>
