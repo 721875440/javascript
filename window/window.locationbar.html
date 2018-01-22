@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+
+if(window.XDomainRequest){
+  var xdr = new XDomainRequest();
+
+  xdr.open("POST", "http://127.0.0.1/github/php/temp/demo.php?a=10000");
+
+  xdr.onprogress = function () {
+    //Progress
+  };
+
+  xdr.ontimeout = function () { 
+    //Timeout
+  };
+
+  xdr.onerror = function () { 
+    //Error Occured
+  };
+
+  xdr.onload = function() {
+    alert(xdr.responseText);
+  }
+
+  setTimeout(function () {
+    xdr.send("a=555");
+  }, 0);
+}
+
+</script>
+
+</body>
+</html>

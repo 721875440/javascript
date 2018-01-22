@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+
+
+<style>
+#output{ width:500px;height:500px; background-color:#AB383A;}
+</style>
+
+<div id="Alt">Alt</div>
+<div id="Control">Control</div>
+<div id="Meta">Meta</div>
+<div id="Shift">Shift</div>
+<div id="AltGraph">AltGraph</div>
+<div id="output"></div>
+
+
+
+<script>
+// A subset of keys from https://w3c.github.io/uievents/#keys-modifiers
+var modifierKeys = ['Alt', 'Control', 'Meta', 'Shift', 'AltGraph'];
+
+document.querySelector('#output').addEventListener('mousemove', function(evt) {
+  modifierKeys.forEach(function(modifierKey) {
+    var pressed = evt.getModifierState(modifierKey);
+    document.getElementById(modifierKey).style.color =
+      pressed ? 'red' : 'blue';
+  });
+});
+</script>
+
+</body>
+</html>

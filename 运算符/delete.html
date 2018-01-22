@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+var obj = { };
+obj.x = { name: "张三" };
+// 删除obj对象的属性x，对象"张三"由于失去引用而被垃圾回收
+delete obj.x;
+console.log(obj.x);//undefined
+
+
+
+var obj2 = new Object();
+var obj3 = { name: "李四" };
+obj2.x = obj3;
+// 虽然删除了x属性，但由于还存在其他引用，对象"李四"不会被垃圾回收
+delete obj2.x;
+console.log(obj2.x);//undefined
+console.log(obj3);//Object {name: "李四"}
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
